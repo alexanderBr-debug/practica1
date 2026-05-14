@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velocity Elite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#050505;
+      color:white;
+      font-family:'Inter', sans-serif;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:white;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:1000;
+      padding:25px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(0,0,0,0.5);
+      backdrop-filter:blur(10px);
+    }
+
+    .logo{
+      font-size:35px;
+      color:#D4AF37;
+      font-family:'Cormorant Garamond', serif;
+      font-weight:700;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:40px;
+    }
+
+    .nav-links a{
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#D4AF37;
+    }
+
+    /* HERO */
+
+    .hero{
+      height:100vh;
+      background:url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920') center/cover;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.75);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      animation:fadeIn 2s;
+      padding:20px;
+    }
+
+    .hero h1{
+      font-size:90px;
+      color:#D4AF37;
+      font-family:'Cormorant Garamond', serif;
+    }
+
+    .hero p{
+      margin-top:20px;
+      font-size:24px;
+      color:#ccc;
+    }
+
+    .hero-buttons{
+      margin-top:40px;
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:15px 35px;
+      border-radius:40px;
+      border:none;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .gold{
+      background:#D4AF37;
+      color:black;
+    }
+
+    .dark{
+      background:transparent;
+      border:1px solid #D4AF37;
+      color:#D4AF37;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+    }
+
+    /* SHOWROOM */
+
+    .section{
+      padding:120px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:60px;
+      color:#D4AF37;
+      font-family:'Cormorant Garamond', serif;
+    }
+
+    .section-title p{
+      color:#999;
+      margin-top:10px;
+    }
+
+    .cars-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:35px;
+    }
+
+    .card{
+      background:#111;
+      border-radius:25px;
+      overflow:hidden;
+      border:1px solid #222;
+      transition:0.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-12px);
+      border-color:#D4AF37;
+      box-shadow:0 0 25px rgba(212,175,55,0.3);
+    }
+
+    .card img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:25px;
+    }
+
+    .card-content h3{
+      font-size:35px;
+      font-family:'Cormorant Garamond', serif;
+      color:#D4AF37;
+    }
+
+    .specs{
+      margin-top:20px;
+      display:grid;
+      gap:10px;
+      color:#ccc;
+    }
+
+    .card-buttons{
+      margin-top:25px;
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .card-buttons a{
+      padding:12px 20px;
+      border-radius:30px;
+      font-size:14px;
+      transition:0.3s;
+    }
+
+    .view{
+      background:#D4AF37;
+      color:black;
+    }
+
+    .reserve{
+      border:1px solid #D4AF37;
+      color:#D4AF37;
+    }
+
+    /* ABOUT */
+
+    .about{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:60px;
+      align-items:center;
+    }
+
+    .about img{
+      width:100%;
+      border-radius:25px;
+    }
+
+    .about-text h2{
+      font-size:60px;
+      color:#D4AF37;
+      font-family:'Cormorant Garamond', serif;
+      margin-bottom:20px;
+    }
+
+    .about-text p{
+      line-height:1.8;
+      color:#bbb;
+      margin-bottom:20px;
+    }
+
+    /* CONTACT */
+
+    .contact-box{
+      max-width:700px;
+      margin:auto;
+      background:#111;
+      padding:50px;
+      border-radius:30px;
+      border:1px solid #222;
+    }
+
+    .contact-box form{
+      display:grid;
+      gap:20px;
+    }
+
+    input,
+    textarea{
+      background:#050505;
+      border:1px solid #333;
+      padding:18px;
+      border-radius:15px;
+      color:white;
+      outline:none;
+    }
+
+    textarea{
+      resize:none;
+      height:150px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      border-top:1px solid #222;
+      padding:40px;
+      text-align:center;
+      color:#777;
+    }
+
+    /* ANIMATION */
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      nav{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .hero h1{
+        font-size:55px;
+      }
+
+      .section-title h2,
+      .about-text h2{
+        font-size:42px;
+      }
+
+      .nav-links{
+        gap:20px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+    <div class="logo">Velocity Elite</div>
+
+    <div class="nav-links">
+      <a href="#home">Inicio</a>
+      <a href="#inventory">Inventario</a>
+      <a href="#about">Nosotros</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <h1>Velocity Elite</h1>
+
+      <p>
+        Exclusive Hypercars Marketplace
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#inventory">
+          <button class="btn gold">Explorar Vehículos</button>
+        </a>
+
+        <a href="#contact">
+          <button class="btn dark">Contacto VIP</button>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- INVENTORY -->
+
+  <section class="section" id="inventory">
+
+    <div class="section-title">
+      <h2>Elite Inventory</h2>
+      <p>Luxury engineering without limits</p>
+    </div>
+
+    <div class="cars-grid">
+
+      <!-- CARD -->
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=1200" alt="Bugatti Chiron">
+
+        <div class="card-content">
+          <h3>Bugatti Chiron</h3>
+
+          <div class="specs">
+            <p>1500 HP</p>
+            <p>0-100 km/h : 2.3s</p>
+            <p>420 km/h</p>
+            <p>$3,200,000</p>
+          </div>
+
+          <div class="card-buttons">
+            <a href="https://www.bugatti.com" target="_blank" class="view">
+              Ver Más
+            </a>
+
+            <a href="#contact" class="reserve">
+              Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD -->
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200" alt="Jesko">
+
+        <div class="card-content">
+          <h3>Koenigsegg Jesko</h3>
+
+          <div class="specs">
+            <p>1600 HP</p>
+            <p>0-100 km/h : 2.5s</p>
+            <p>482 km/h</p>
+            <p>$3,500,000</p>
+          </div>
+
+          <div class="card-buttons">
+            <a href="https://www.koenigsegg.com" target="_blank" class="view">
+              Ver Más
+            </a>
+
+            <a href="#contact" class="reserve">
+              Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD -->
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200" alt="Lamborghini">
+
+        <div class="card-content">
+          <h3>Lamborghini Revuelto</h3>
+
+          <div class="specs">
+            <p>1015 HP</p>
+            <p>0-100 km/h : 2.5s</p>
+            <p>350 km/h</p>
+            <p>$600,000</p>
+          </div>
+
+          <div class="card-buttons">
+            <a href="https://www.lamborghini.com" target="_blank" class="view">
+              Ver Más
+            </a>
+
+            <a href="#contact" class="reserve">
+              Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="section" id="about">
+
+    <div class="about">
+
+      <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200" alt="Luxury Car">
+
+      <div class="about-text">
+        <h2>Luxury Experience</h2>
+
+        <p>
+          Velocity Elite redefine la experiencia digital automotriz con un catálogo exclusivo de hypercars y superdeportivos de lujo.
+        </p>
+
+        <p>
+          Diseñado con una estética premium dark mode, nuestro showroom ofrece una experiencia elegante, rápida y cinematográfica.
+        </p>
+
+        <a href="#contact">
+          <button class="btn gold">
+            Solicitar Asesor VIP
+          </button>
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="section" id="contact">
+
+    <div class="section-title">
+      <h2>Contacto VIP</h2>
+      <p>Reserve your dream hypercar</p>
+    </div>
+
+    <div class="contact-box">
+
+      <form>
+
+        <input type="text" placeholder="Nombre completo">
+
+        <input type="email" placeholder="Correo electrónico">
+
+        <input type="text" placeholder="Vehículo de interés">
+
+        <textarea placeholder="Mensaje"></textarea>
+
+        <button class="btn gold">
+          Enviar Solicitud
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    Velocity Elite © 2026 | Luxury Hypercars Marketplace
+  </footer>
+
+</body>
+</html>
